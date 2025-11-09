@@ -1,7 +1,7 @@
 {
   inputs = {
     nix-ros-overlay.url = "github:lopsided98/nix-ros-overlay/master";
-    nixpkgs.follows = "nix-ros-overlay/nixpkgs";  # IMPORTANT!!!
+    nixpkgs.follows = "nix-ros-overlay/nixpkgs";
   };
   outputs = { self, nix-ros-overlay, nixpkgs }:
     nix-ros-overlay.inputs.flake-utils.lib.eachDefaultSystem (system:
@@ -15,10 +15,16 @@
           name = "ROS2 -> Foxglove Jetson Demo";
           packages = [
             pkgs.colcon
-            # ... other non-ROS packages
+            pkgs.git
+            pkgs.libyaml
             (with pkgs.rosPackages.humble; buildEnv {
               paths = [
                 ros-core
+                ament-cmake-core
+                rclcpp
+                rclpy
+                std-msgs
+                example-interfaces
                 # ... other ROS packages
               ];
             })

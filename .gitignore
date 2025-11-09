@@ -35,6 +35,8 @@
 *.out
 *.app
 
+compile_commands.json
+
 ### macOS ###
 # General
 .DS_Store
@@ -309,7 +311,7 @@ COLCON_IGNORE
 AMENT_IGNORE
 
 ### VisualStudioCode ###
-.vscode/*
+.vscode
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -326,5 +328,7 @@ AMENT_IGNORE
 # Ignore all local history of files
 .history
 .ionide
+
+TODO.txt
 
 # End of https://www.toptal.com/developers/gitignore/api/ros,ros2,visualstudiocode,macos,c++,python
