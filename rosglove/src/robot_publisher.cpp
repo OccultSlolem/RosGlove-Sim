@@ -18,9 +18,6 @@
 
 using namespace std::chrono_literals;
 
-#define BATTERY_DEPLETION_INTERVAL 1000ms // Time interval for battery depletion
-#define BATTERY_DEPLETION_RATE 0.1f      // Battery depletion rate per interval
-
 class RobotSimulator : public rclcpp::Node
 {
 public:
@@ -40,7 +37,7 @@ public:
 
     // Battery/temp parameters
     battery_start_ = this->declare_parameter<float>("battery_start", 100.0f);
-    battery_depletion_per_sec_ = this->declare_parameter<float>("battery_depletion_per_sec", 0.1f);
+    battery_depletion_per_sec_ = this->declare_parameter<float>("battery_depletion_per_sec", 0.001f);
     base_temperature_c = this->declare_parameter<float>("base_temperature_c", 20.0f);
     temperature_jitter_c_ = this->declare_parameter<float>("temperature_jitter_c", 5.0f);
 
@@ -89,7 +86,7 @@ private:
   void onUpdate()
   {
     const auto now = this->now();
-    const double dt = (now - last_cmd_time_).seconds();
+    const double dt = (now - last_update_time_).seconds();
     if (dt <= 0.0) return;
     last_update_time_ = now;
 
