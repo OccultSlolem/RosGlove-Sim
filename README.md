@@ -5,16 +5,31 @@ publishes to ROS2 topics, and visualizes the live data stream in Foxglove Studio
 
 ---
 
+### Our simulated robot
 
-[placeholder]
+For the purposes of this repo, we will simulate a simple "box-on-wheels" type robot
+that can collect the following data from its sensors:
+- TBD
 
-note to self: do the following to get intellisense to work (for my setup, M4 MBP)
- - open vscode inside the nix dev shell (gotta test to see if this step is actually needed)
- - Run `nix develop`, then go to the pkg folder and build it so colcon will export `compile_commands.json`:
+### Development
+
+This repo uses **nix** to allow for an easily reproducible development environment. After
+cloning the repo, all you need to do is run `nix develop` and it will download the
+necessary dependencies and boot you into a shell you can run the project from.
+
+**Foxglove connection**
+
+Placeholder
+
+**VSCode Setup (macOS)**
+
+These were the steps I had to run to get intellisense working on my setup (M4 MacBook Pro, macOS Tahoe 26.0.1)
+ - Run `code .` from inside the nix dev shell (gotta test to see if this step is actually needed)
+ - From inside the nix shell, cd to the pkg folder and build it so colcon will export `compile_commands.json`, like so:
   ``colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON``
- - create a symlink at the root folder for the exported file:
+ - Create a symlink at the root folder for the exported file:
   ``ln -s <pkg folder>/build/compile_commands.json compile_commands.json``
- - I use this `c_cpp_properties.json` file:
+ - I use this `.vscode/c_cpp_properties.json` file:
 
 ```json
 {

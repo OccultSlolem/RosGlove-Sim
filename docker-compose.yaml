@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  rosglove-sim:
+    build: .
+    volumes:
+      - .:/workspace
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw  # For GUI if needed (e.g., RViz)
+    environment:
+      - DISPLAY=${DISPLAY}  # For GUI forwarding
+    network_mode: host  # Simplifies networking for ROS
+    stdin_open: true
+    tty: true

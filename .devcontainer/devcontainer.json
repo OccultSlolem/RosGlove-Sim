@@ -1,0 +1,33 @@
+{
+  "name": "ROS2 Jazzy Dev Container",
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "rosglove-sim",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+      "extensions": [
+        "ms-vscode.cpptools-extension-pack",               // C/C++ extension
+        "ranch-hand-robotics.rde-ros-2"         // ROS-specific extensions
+      ],
+      "settings": {
+        "C_Cpp.default.includePath": [
+          "/opt/ros/jazzy/include/**",
+          "/workspace/install/include/**"
+        ],
+        "C_Cpp.default.compilerPath": "/usr/bin/g++",
+        "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json",
+        "cmake.configureOnOpen": true
+      }
+  },
+  // Force bash for the lifecycle step, and persist sourcing for future terminals
+  "postCreateCommand": "bash -lc 'for f in /opt/ros/jazzy/setup.bash /workspace/install/setup.bash; do if [ -f \"$f\" ]; then echo \"Sourcing $f\"; grep -qxF \"source $f\" ~/.bashrc || echo \"source $f\" >> ~/.bashrc; source \"$f\"; fi; done'",
+
+  // Ensures the container doesn’t override with a non-bash command if compose sets one
+  "overrideCommand": false,
+
+  // Optional: set env vars early (helpful for tooling)
+  "containerEnv": {
+    "ROS_DISTRO": "jazzy"
+  }
+
+}

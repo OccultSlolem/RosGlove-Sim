@@ -22,10 +22,11 @@
                 ros-core
                 ament-cmake-core
                 rclcpp
-                rclpy
                 std-msgs
-                example-interfaces
-                # ... other ROS packages
+                # foxglove-bridge
+                sensor-msgs
+                nav-msgs
+                geometry-msgs
               ];
             })
           ];
