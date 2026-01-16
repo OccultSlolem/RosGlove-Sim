@@ -47,8 +47,23 @@ def generate_launch_description():
         }]
     )
 
+    ota_update = Node(
+        package='rosglove',
+        executable='ota_update_node',
+        name='ota_update_node',
+        output='screen',
+        parameters=[{
+            'current_version': '1.0.0',
+            'download_duration_sec': 10.0,
+            'install_duration_sec': 5.0,
+            'failure_probability': 0.1,
+            'update_rate_hz': 10.0
+        }]
+    )
+
     return LaunchDescription([
         robot_state_publisher,
         sim,
-        bridge
+        bridge,
+        ota_update
     ])
